@@ -1,0 +1,152 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Contáctanos - Hotel Santorini{% endblock %}
+
+{% block body %}
+
+<div>
+
+<div class="uk-section uk-section-large uk-background-cover " data-src="{{ asset('assets/components/header.jpg') }}" uk-img>
+
+  <div class="uk-container tm-container-medium uk-position-relative">
+
+
+
+    <div class="uk-child-width-1-2@m uk-flex uk-flex-middle" uk-grid>
+
+
+
+
+<div>
+  <div class="uk-text-left@m uk-text-center">
+
+   <h1>Estamos trabajando en una nueva imagen.</h1>
+   <p>Servicios de Hotelería, Restaurant y Eventos en El Quisco.</p>
+    <a class="link-a" href="https://www.google.com/maps/place/Av+Costanera+Nte+163,+El+Quisco,+Regi%C3%B3n+de+Valpara%C3%ADso/@-33.3862197,-71.6949681,17z/data=!3m1!4b1!4m5!3m4!1s0x9662113641d75a29:0xbcdfdadd5b44cff9!8m2!3d-33.3862242!4d-71.6927794" target="_blank">Ubícanos</a>
+
+  </div>
+</div>
+
+<div>
+  <div>
+
+<div class="contact-container">
+
+  <h3>Realiza una reserva ahora</h3>
+
+  <form class="uk-grid-small" id="contact-form" uk-grid>
+      <div class="uk-width-1-1">
+          <input id="res_name" class="uk-input" type="text" required placeholder="Nombre Completo">
+      </div>
+      <div class="uk-width-1-1">
+          <input id="res_mail" class="uk-input" type="email" required placeholder="Correo">
+      </div>
+      <div class="uk-width-1-3@s">
+          <input id="res_phone" class="uk-input" type="phone" required placeholder="Teléfono">
+      </div>
+      <div class="uk-width-1-3@s">
+          <input id="res_huesp" class="uk-input" type="text" required placeholder="Nro. Huéspedes">
+      </div>
+      <div class="uk-width-1-3@s">
+          <input id="res_date" class="uk-input" type="text" required placeholder="Fecha y Hora">
+      </div>
+      <div class="uk-width-1-1">
+          <textarea id="res_message" class="uk-textarea" required rows="3" type="text" placeholder="Mensaje"></textarea>
+      </div>
+
+      <div class="uk-width-1-1">
+        <a id="sendmail" class="link-a uk-margin-small-right">Enviar</a>
+        <div id="spinner-loader-mail" uk-spinner class="uk-hidden"></div>
+      </div>
+  </form>
+
+
+</div>
+
+  </div>
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="uk-position-top">
+  <div class="uk-container tm-container-medium">
+    {% include 'frontend/components/mainnav.html.twig' %}
+  </div>
+</div>
+
+<div class="uk-section">
+
+    <div class="uk-width-xlarge uk-text-center uk-margin-auto">
+      <h1>
+El mar no tiene caminos, el mar no tiene explicaciones.<span class="uk-margin-small-left" uk-icon="icon: quote-right; ratio:2"></span></h1>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+$('#sendmail').click(function(){
+
+      var res_name = $('#res_name').val();
+      var res_mail = $('#res_mail').val();
+      var res_phone = $('#res_phone').val();
+      var res_huesp = $('#res_huesp').val();
+      var res_date = $('#res_date').val();
+      var res_message = $('#res_message').val();
+
+
+    if(res_name!="" && res_mail!="" && res_phone!="" && res_huesp!="" && res_date!=""){
+
+    $('#spinner-loader-mail').removeClass('uk-hidden');
+
+      $.ajax({
+     type: 'post',
+     url: '{{ path('request-sendmail') }}',
+     dataType: "json",
+    data: {
+       "name": res_name,
+       "mail": res_mail,
+       "phone": res_phone,
+       "huesp": res_huesp,
+       "date": res_date,
+       "message": res_message
+     },
+     async: true,
+     success: function(data) {
+        UIkit.notification({
+          message: 'Recibimos tu reservación, nos comunicaremos en la brevedad.',
+          status: 'success',
+          pos: 'top-center',
+          timeout: 2000
+       });
+
+    $('#spinner-loader-mail').addClass('uk-hidden');
+
+     }
+
+
+   });
+ }else{
+   UIkit.notification({
+  message: 'Porfavor revise su reservación! Podrían faltarle algunos campos.',
+  status: 'danger',
+  pos: 'top-center',
+  timeout: 2000
+});
+ }
+
+
+});
+
+
+</script>
+
+
+
+{% endblock %}

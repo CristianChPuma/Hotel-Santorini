@@ -1,0 +1,83 @@
+$primary-font: 'Playfair Display', serif;
+$secondary-font: 'Raleway', sans-serif;
+
+$blue-accent: #3479f0;
+$red-accent: #FA5952;
+
+h1,h2,h3,h4,h5,h6{
+  font-family:  $primary-font;
+}
+
+h1{
+  font-weight: 400;
+}
+
+p{
+  font-family: $secondary-font;
+  font-size: 14px;
+}
+
+a, a:focus, a:hover{
+  text-decoration: none;
+}
+
+.link-a{
+  border-radius: 150px;
+  background: $blue-accent;
+  padding: 10px 30px;
+  color: #fff;
+  transition: all 200ms ease-in-out;
+  font-family: $secondary-font;
+
+  &:hover{
+  background:  #3c5dc6;
+  color: #fff;
+  }
+
+}
+
+.tm-container-medium{
+  max-height: 1360px;
+}
+
+.contact-container{
+  background: #fff;
+  box-shadow: 0px 20px 30px rgba(0,0,0,0.08);
+  padding: 30px;
+  border-radius: 5px;
+}
+
+input.uk-input, textarea.uk-textarea{
+
+   border-radius: 5px;
+   font-family: $secondary-font;
+   font-size: 14px;
+
+}
+
+.uk-notification-message{
+	font-weight: 400;
+	font-family: $secondary-font;
+	font-size: 14px;
+	border-radius: 100px;
+  padding: 10px 30px;
+	color: #fff;
+  text-align: center;
+
+  .uk-close:focus, .uk-close:hover{
+    color: #fff;
+  }
+
+  .uk-close{
+    color: rgba(255,255,255,0.8);
+  }
+
+}
+
+.uk-notification-message-warning, .uk-notification-message-danger{
+	background: $red-accent;
+}
+
+.uk-notification-message-success, .uk-notification-message-primary{
+	background: $blue-accent;
+}
