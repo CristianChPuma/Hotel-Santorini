@@ -1,0 +1,34 @@
+<div id="room-container-{{ room.id }}">
+
+   <div  class="roomcard uk-text-center">
+     <div class="header uk-background-cover" uk-img data-src="{{ asset('uploads/' ~ room.cover) }}"></div>
+    <div class="content uk-padding uk-box-shadow-small uk-box-shadow-hover-medium">
+      <h3>{{ room.name }}</h3>
+      <p class="uk-margin">{{ room.intro }}</p>
+      {% if style == 'admin' %}
+      <a class="link-style-a delete-room" data-id="{{ room.id }}" >Eliminar</a>
+      {% elseif style == 'front' %}
+      <a class="link-style-a" uk-toggle href="#room-modal-{{ room.id }}">Ver Más</a>
+      {% endif %}
+    </div>
+   </div>
+
+</div>
+
+<div id="room-modal-{{ room.id }}" class="uk-modal-full" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+        <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+            <div class="uk-background-cover" data-src="{{ asset('uploads/' ~ room.cover) }}" uk-img uk-height-viewport></div>
+            <div class="uk-padding-large">
+                <div class="uk-width-xlarge uk-margin-auto">
+                  <h1>{{ room.name }}</h1>
+                  <p class="uk-margin">{{ room.description|raw }}</p>
+                  <div class="uk-margin-top">
+                    <a class="link-style-a" href="#reserve-modal" uk-toggle>Realizar Una Reserva</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

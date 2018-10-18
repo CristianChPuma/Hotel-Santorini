@@ -1,0 +1,149 @@
+<div class="header uk-position-relative">
+
+  <main>
+      <div class="message">Some message for mobile if needed.</div>
+      <div class="grid">
+
+        <div class="grid__item grid__item--bg theme-2">
+          <div class="grid__item-img" data-displacement="{{ asset('assets/displacement/7.jpg') }}" data-intensity="-0.65" data-speedIn="1.2" data-speedOut="1.2">
+            <img src="{{ asset('uploads/' ~ items[1].value) }}" alt="Image"/>
+            <img src="{{ asset('uploads/' ~ items[2].value) }}" alt="Image"/>
+          </div>
+          <div class="grid__item-content">
+            <span class="grid__item-meta"><img width="100" src="{{ asset('assets/components/mainlogocolorful.svg') }}" alt=""></span>
+            <h2 class="grid__item-title">{{ items[0].value }}</h2>
+            <h3 class="grid__item-subtitle">
+              <span>Comparte tus mejores momentos con nosotros</span>
+              <a class="grid__item-link" href="#reserve-modal" uk-toggle>Realiza tu reserva</a>
+            </h3>
+          </div>
+        </div>
+        <div class="grid__item theme-1 uk-background-cover" uk-img data-src="{{ asset('assets/components/images/image-b.jpg') }}">
+          <div class="grid__item-content ">
+            <nav class="grid__item-nav">
+              <a href="{{ path('gallery') }}" class="grid__item-link">Galería</a>
+              <a href="{{ path('services') }}" class="grid__item-link">Servicios</a>
+              <a href="#reserve-modal" uk-toggle class="grid__item-link">Contacto</a>
+            </nav>
+            <h2 class="grid__item-title grid__item-title--small">Eventos Próximos</h2>
+            <div class="uk-hidden"><div class="uk-card uk-card-body uk-card-default">
+              owo
+            </div></div>
+
+  <div class="enable-pointer">
+    <div uk-slider="autoplay: true;">
+
+<div class="uk-position-relative uk-visible-toggle">
+
+<ul class="uk-slider-items uk-grid-match uk-grid-small uk-child-width-1-2@s uk-grid">
+  <li>
+      <div class="uk-card uk-card-default">
+          <div class="uk-card-body">
+              <h3 class="uk-card-title">Evento Nacional</h3>
+              <p class="uk-margin">Evento próximo del mes de Octubre.</p>
+              <a href="#modal-ad-1" class="link-style-a" uk-toggle>Ver más</a>
+          </div>
+      </div>
+  </li>
+  <li>
+      <div class="uk-card uk-card-default">
+          <div class="uk-card-body">
+              <h3 class="uk-card-title">Ofertas de Verano</h3>
+              <p class="uk-margin">Evento próximo del mes de Octubre.</p>
+              <a href="" class="link-style-a" uk-toggle>Ver más</a>
+          </div>
+      </div>
+  </li>
+  <li>
+      <div class="uk-card uk-card-default">
+          <div class="uk-card-body">
+              <h3 class="uk-card-title">Evento Nacional</h3>
+              <p class="uk-margin">Evento próximo del mes de Octubre.</p>
+              <a href="" class="link-style-a" uk-toggle>Ver más</a>
+          </div>
+      </div>
+  </li>
+  <li>
+      <div class="uk-card uk-card-default">
+          <div class="uk-card-body">
+              <h3 class="uk-card-title">Ofertas de Verano</h3>
+              <p class="uk-margin">Evento próximo del mes de Octubre.</p>
+              <a href="" class="link-style-a" uk-toggle>Ver más</a>
+          </div>
+      </div>
+  </li>
+</ul>
+
+<a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+<a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
+</div>
+
+<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
+</div>
+  </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    {#<div class="uk-position-top">
+      <div class="uk-container tm-container-medium">
+        {% include 'frontend/components/mainnav.html.twig' %}
+      </div>
+    </div>#}
+
+
+    <div class="fog-hover">
+      <img src="{{  asset('assets/components/border-bottom-fog.png') }}" alt="">
+    </div>
+
+</div>
+
+{# modals #}
+
+<div id="modal-ad-1" class="uk-modal-container uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+
+<img src="https://images.unsplash.com/photo-1522930600316-3fbc21b657b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a22f133b12c9e45cd8205d9ed19b8b99&auto=format&fit=crop&w=1347&q=80" uk-img alt="">
+    </div>
+</div>
+
+  <script>
+
+
+/*Array.from(document.querySelectorAll('.grid__item-img')).forEach((el) => {
+const imgs = Array.from(el.querySelectorAll('img'));
+new hoverEffect({
+parent: el,
+intensity: el.dataset.intensity || undefined,
+speedIn: el.dataset.speedin || undefined,
+speedOut: el.dataset.speedout || undefined,
+easing: el.dataset.easing || undefined,
+hover: el.dataset.hover || undefined,
+image1: imgs[0].getAttribute('src'),
+image2: imgs[1].getAttribute('src'),
+displacementImage: el.dataset.displacement
+});
+});*/
+
+   var container = document.querySelector('.grid__item-img');
+   var images = Array.from(container.querySelectorAll('img'));
+
+   var myAnimation = new hoverEffect({
+     parent: document.querySelector('.grid__item-img'),
+     image1: images[0].getAttribute('src'),
+     image2: images[1].getAttribute('src'),
+     displacementImage: container.dataset.displacement,
+     intensity: container.dataset.intensity || undefined,
+     speedIn: container.dataset.speedin || undefined,
+     speedOut: container.dataset.speedout || undefined,
+     easing: container.dataset.easing || undefined,
+   });
+
+
+      $(images).remove();
+</script>

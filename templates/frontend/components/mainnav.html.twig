@@ -2,8 +2,38 @@
     <div class="uk-navbar-left">
 
         <ul class="uk-navbar-nav">
-            <li class="uk-active"><a href="#"><img width="90px" src="{{ asset('assets/components/mainlogocolorful.svg') }}" alt=""></a></li>
+            <li class="uk-active"><a href="{{ path('home') }}"><img width="90px" src="{{ asset('assets/components/mainlogocolorful.svg') }}" alt=""></a></li>
         </ul>
 
     </div>
+
+   <div class="uk-navbar-right uk-visible@s">
+     <ul class="uk-navbar-nav main-nav uk-flex">
+         <li class="uk-active"><a  href="{{ path('gallery') }}">Galería</a></li>
+         <li class="uk-active"><a href="{{ path('services') }}">Servicios</a></li>
+         <li class="uk-active"><a href="{{ path('rooms') }}">Habitaciones</a></li>
+         <li class="uk-active"><a href="#reserve-modal" uk-toggle>Reservas</a></li>
+     </ul>
+   </div>
+
+   <div class="uk-navbar-right uk-hidden@s">
+     <a class="uk-navbar-toggle" uk-toggle href="#offcanvas-usage">
+            <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left"></span>
+        </a>
+   </div>
+
 </nav>
+
+<div id="offcanvas-usage" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar uk-background-default offcanvas-light uk-flex uk-flex-column">
+
+            <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                <li class="uk-active"><a href="{{ path('home') }}">Inicio</a></li>
+                <li class="uk-active"><a href="{{ path('services') }}">Servicios</a></li>
+                <li class="uk-active"><a href="{{ path('gallery') }}">Galería</a></li>
+                <li class="uk-active"><a href="{{ path('rooms') }}">Habitaciones</a></li>
+                <li class="uk-active"><a href="#reserve-modal" uk-toggle>Reservas</a></li>
+            </ul>
+
+        </div>
+    </div>

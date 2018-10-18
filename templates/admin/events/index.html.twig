@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+  <h2>Eventos</h2>
+  <p>Administra Los Eventos Próximos</p>
+<div class="uk-margin"><a class="link-style-a" uk-toggle href="#modal-addevent"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: plus"></span> Agregar</a></div>
+  <hr class="uk-hr uk-margin-medium">
+
+           <div id="modal-addevent" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <div class="uk-margin">
+          <h2 class="uk-modal-title">Agregar Evento</h2>
+        </div>
+        <form>
+          <div class="uk-margin">
+         <input class="uk-input" type="text" placeholder="Título">
+     </div>
+     <div class="uk-margin">
+              <textarea class="uk-textarea" type="text" placeholder="Descripción"></textarea>
+          </div>
+
+          <div class="uk-margin" uk-margin>
+         <div uk-form-custom="target: true">
+             <input type="file">
+             <input class="uk-input uk-form-width-large" type="text" placeholder="Seleccionar Archivo" disabled>
+         </div>
+     </div>
+
+
+        </form>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-primary link-style-a" type="button">Guardar</button>
+        </p>
+    </div>
+</div>
+
+           {% endblock %}

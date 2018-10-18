@@ -1,0 +1,119 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<div class="uk-section">
+
+  <div class="uk-container tm-container-medium uk-position-relative">
+
+    <div class="uk-text-center uk-width-3-5 uk-margin-auto">
+
+      <div class="uk-inline">
+        <img uk-img class="header-image uk-hidden" src="{{ asset('assets/components/services-header.png') }}" alt="">
+        <canvas id="canvas-fog"></canvas>
+        <div class="uk-position-center">
+          <h1 class="sectiontitle">{{ title }}</h1>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="uk-section uk-text-center">
+
+<h1 class="text-cover">Inmortaliza</h1>
+
+</div>
+
+<div class="uk-section uk-section-large uk-background-cover" data-src="{{ asset('assets/components/bg-a.png') }}" uk-img>
+
+<div class="uk-container tm-container-medium">
+  <div class="uk-child-width-1-2@m uk-flex uk-text-center uk-flex-middle" uk-grid>
+
+   <div>
+     <div>
+       <img src="{{ asset('uploads/' ~ items[24].value) }}" alt="">
+     </div>
+   </div>
+   <div>
+     <div >
+       <div class="uk-width-large@m uk-text-left@m uk-margin-auto">
+         <h4 class="inview-animation">Servicios</h4>
+         <h1 class="uk-margin inview-animation">{{ items[25].value }}</h1>
+         <p class="inview-animation">{{ items[26].value }}</p>
+       </div>
+     </div>
+   </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="uk-section uk-section-large uk-text-center uk-background-cover" data-src="{{ asset('assets/components/bg-b.png') }}" uk-img>
+
+<div class="uk-container tm-container-medium">
+  <div class="uk-child-width-1-2@m uk-flex uk-flex-middle" uk-grid>
+
+   <div>
+     <div>
+       <img src="{{ asset('uploads/' ~ items[27].value) }}" alt="">
+     </div>
+   </div>
+   <div class="uk-flex-first@m">
+     <div class="uk-text-left@m uk-margin-auto">
+       <div class="uk-width-large@m">
+         <h4 class="inview-animation">Servicios</h4>
+         <h1 class="uk-margin inview-animation">{{ items[28].value }}</h1>
+         <p class="inview-animation">{{ items[29].value }}</p>
+       </div>
+     </div>
+   </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="uk-section uk-section-large uk-background-cover" data-src="{{ asset('assets/components/bg-a.png') }}" uk-img>
+
+<div class="uk-container tm-container-medium">
+  <div class="uk-child-width-1-2@m uk-flex uk-text-center uk-flex-middle" uk-grid>
+
+   <div>
+     <div>
+       <img src="{{ asset('uploads/' ~ items[30].value) }}" alt="">
+     </div>
+   </div>
+   <div>
+     <div >
+       <div class="uk-width-large@m uk-text-left@m uk-margin-auto">
+         <h4 class="inview-animation">Servicios</h4>
+         <h1 class="uk-margin inview-animation">{{ items[31].value }}</h1>
+         <p class="inview-animation">{{ items[32].value }}</p>
+       </div>
+     </div>
+   </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="uk-margin-large"></div>
+
+<div class="uk-position-top">
+  <div class="uk-container tm-container-medium">
+    {% include 'frontend/components/mainnav.html.twig' %}
+  </div>
+</div>
+
+
+{% include 'frontend/components/footer.html.twig' %}
+
+{% endblock %}

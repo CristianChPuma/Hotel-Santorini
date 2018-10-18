@@ -1,0 +1,106 @@
+<div id="reserve-modal" class="uk-modal-full" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+        <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+            <div class="uk-background-cover uk-flex uk-flex-middle" uk-height-viewport>
+                          <img class=" modal-reserve-cover uk-hidden" src="{{ asset('assets/components/reserve-modal-cover.png') }}" alt="">
+                                                    <canvas id="fog-modal"></canvas>
+            </div>
+            <div class="uk-padding-large" >
+              <div class="contact-container uk-margin-auto uk-width-xlarge uk-padding">
+
+                <div class="uk-margin">
+                  <h3>Realiza una reserva ahora</h3>
+                </div>
+
+                <form class="uk-grid-small" id="contact-form" uk-grid>
+                    <div class="uk-width-1-1">
+                        <input id="res_name" class="uk-input" type="text" required placeholder="Nombre Completo">
+                    </div>
+                    <div class="uk-width-1-1">
+                        <input id="res_mail" class="uk-input" type="email" required placeholder="Correo">
+                    </div>
+                    <div class="uk-width-1-3@s">
+                        <input id="res_phone" class="uk-input" type="phone" required placeholder="Teléfono">
+                    </div>
+                    <div class="uk-width-1-3@s">
+                        <input id="res_huesp" class="uk-input" type="text" required placeholder="Nro. Huéspedes">
+                    </div>
+                    <div class="uk-width-1-3@s">
+                        <input id="res_date" class="uk-input" type="text" required placeholder="Fecha y Hora">
+                    </div>
+                    <div class="uk-width-1-1">
+                        <textarea id="res_message" class="uk-textarea" required rows="3" type="text" placeholder="Mensaje"></textarea>
+                    </div>
+
+                    <div class="uk-width-1-1">
+                      <a id="sendmail" class="link-style-a uk-margin-small-right">Enviar</a>
+                      <div id="spinner-loader-mail" uk-spinner class="uk-hidden"></div>
+                    </div>
+                </form>
+
+
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+$('#sendmail').click(function(){
+
+      var res_name = $('#res_name').val();
+      var res_mail = $('#res_mail').val();
+      var res_phone = $('#res_phone').val();
+      var res_huesp = $('#res_huesp').val();
+      var res_date = $('#res_date').val();
+      var res_message = $('#res_message').val();
+
+
+    if(res_name!="" && res_mail!="" && res_phone!="" && res_huesp!="" && res_date!=""){
+
+    $('#spinner-loader-mail').removeClass('uk-hidden');
+
+      $.ajax({
+     type: 'post',
+     url: '{{ path('request-sendmail') }}',
+     dataType: "json",
+    data: {
+       "name": res_name,
+       "mail": res_mail,
+       "phone": res_phone,
+       "huesp": res_huesp,
+       "date": res_date,
+       "message": res_message
+     },
+     async: true,
+     success: function(data) {
+        UIkit.notification({
+          message: 'Recibimos tu reservación, nos comunicaremos en la brevedad.',
+          status: 'success',
+          pos: 'top-center',
+          timeout: 2000
+       });
+
+    $('#spinner-loader-mail').addClass('uk-hidden');
+
+     }
+
+
+   });
+ }else{
+   UIkit.notification({
+  message: 'Porfavor revise su reservación! Podrían faltarle algunos campos.',
+  status: 'danger',
+  pos: 'top-center',
+  timeout: 2000
+});
+ }
+
+
+});
+
+
+</script>

@@ -1,26 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/css/uikit.min.css"/>
-          <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-          <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900|Raleway:100,200,300i,400" rel="stylesheet">
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% block title %}{% endblock %}
+      | Hotel Santorini</title>
+    {% block stylesheets %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/css/uikit.min.css"/>
+      <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+      <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700|Playfair+Display:400,400i,700,700i" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/js/uikit.min.js"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
       <link rel="shortcut icon" type="image/png" href="{{ asset('assets/components/favicon.png') }}"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/97/three.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+      <script src="{{ asset('assets/hover.js') }}" charset="utf-8"></script>
+      <script src="https://unpkg.com/scrollreveal"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    {% endblock %}
+  </head>
+  <body >
 
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('build/app.js') }}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/js/uikit-icons.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-            <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-        {% endblock %}
-    </body>
+  <div class="uk-offcanvas-content">
+
+    <div class="background-lines uk-child-width-1-3 uk-grid-collapse" uk-grid="uk-grid">
+      <div class="line-a"></div>
+      <div class="line-b"></div>
+      <div class="line-c"></div>
+    </div>
+    <div class="uk-overflow-hidden" id="main-container">
+      {% block body %}{% endblock %}
+    </div>
+
+    <div id="loader-container">
+      <div class="loader uk-text-center">
+        <h4 class=" wave-animation" data-duration="2100" >Cargando</h4>
+      </div>
+    </div>
+
+    </div>
+
+    {% include 'frontend/components/contactmodal.html.twig' %}
+
+    <script>
+      var item = $('.wave-animation');
+      item.css('opacity','1');
+      var chars = item.text().split('');
+      var duration = item.data('duration');
+      var htmlspans = "";
+      for(var i=0; i<chars.length; i++){
+        var delay =  (duration / chars.length) * i ;
+        htmlspans += '<span style = "animation-delay: ' +delay+ 'ms">' + (chars[i]) + '</span>';
+      }
+
+      item.html(htmlspans);
+
+    </script>
+
+    {% block javascripts %}
+      <script src="{{ asset('build/app.js') }}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/js/uikit-icons.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+      <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+    {% endblock %}
+  </body>
 </html>

@@ -1,0 +1,200 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+  <h2>Bloques</h2>
+  <p>Bloques seccionados que son mostrados en la portada inicial.</p>
+  <hr class="uk-hr uk-margin-medium">
+
+  <h3 class="uk-margin-bottom"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: pencil;"></span> Encabezado</h3>
+
+  <form class="uk-margin">
+  <input class="uk-input uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" data-id="{{ items[0].id }}" type="text" value="{{ items[0].value }}" placeholder="Vive El Mar">
+</form>
+
+    <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+      <div>
+        <div class="uk-background-cover uk-height-medium uk-position-relative " id="bg-image-{{ items[1].id }}"  style="background-image: url('{{ asset('uploads/' ~ items[1].value) }}');" uk-img>
+          <div class="uk-position-center">
+            <div uk-form-custom>
+            <input type="file" accept="image/png, image/jpeg" class="editable-bg-image" data-id="{{ items[1].id }}" >
+            <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="uk-background-cover uk-height-medium uk-position-relative" id="bg-image-{{ items[2].id }}"  style="background-image: url('{{ asset('uploads/' ~ items[2].value) }}');" uk-img>
+          <div class="uk-position-center">
+            <div uk-form-custom>
+            <input type="file" accept="image/png, image/jpeg" class="editable-bg-image" data-id="{{ items[2].id }}" >
+            <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uk-section uk-section-small">
+
+      <h3 class="uk-margin-bottom"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: pencil;"></span> Bloque Entrada</h3>
+      <form >
+      <input class="uk-input uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" data-id="{{ items[3].id }}"  type="text" value="{{ items[3].value }}" placeholder="Siéntase como en casa">
+    <textarea class="uk-textarea uk-form-blank uk-form-width-large editable-content" type="text" rows="4" data-id="{{ items[4].id }}"  placeholder="Vive El Mar">{{ items[4].value }}</textarea>
+  </form>
+
+    </div>
+
+
+        <div class="uk-section uk-section-small">
+
+          <h3 class="uk-margin-bottom"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: pencil;"></span> Items</h3>
+
+          <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+            <div>
+              <div class="uk-text-center"><img id="image-{{ items[8].id }}"  src="{{ asset('uploads/' ~ items[8].value) }}" alt="">
+                <div class="uk-margin-top" uk-form-custom>
+                <input type="file" accept="image/png, image/jpeg" class="editable-image" data-id="{{ items[8].id }}" >
+                <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+            </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <form >
+                <input class="uk-input uk-form-blank uk-form-width-large edit-title editable-content" data-id="{{ items[5].id }}"  type="text" value="{{ items[5].value }}" placeholder="Siéntase como en casa">
+                <input class="uk-input uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" data-id="{{ items[6].id }}"  type="text" value="{{ items[6].value }}" placeholder="Siéntase como en casa">
+                <textarea class="uk-textarea uk-form-blank uk-form-width-large editable-content" rows="4" type="text" data-id="{{ items[7].id }}"  placeholder="Siéntase como en casa">{{ items[7].value }}</textarea>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+            <div>
+              <div class="uk-text-center"><img id="image-{{ items[12].id }}" src="{{ asset('uploads/' ~ items[12].value) }}" alt="">
+                <div class="uk-margin-top" uk-form-custom>
+                <input type="file" accept="image/png, image/jpeg" class="editable-image" data-id="{{ items[12].id }}" >
+                <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <form >
+                <input class="uk-input uk-form-blank uk-form-width-large edit-title editable-content" data-id="{{ items[9].id }}"  type="text" value="{{ items[9].value }}" placeholder="Siéntase como en casa">
+                <input class="uk-input uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" data-id="{{ items[10].id }}"  type="text" value="{{ items[10].value }}" placeholder="Siéntase como en casa">
+                <textarea class="uk-textarea uk-form-blank uk-form-width-large editable-content" rows="4" type="text" data-id="{{ items[11].id }}"  placeholder="Siéntase como en casa">{{ items[11].value }}</textarea>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="uk-section uk-section-small">
+            <h3 class="uk-margin-bottom"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: pencil;"></span> Galería</h3>
+            <div class="uk-margin-bottom">
+              <div uk-form-custom>
+              <input data-for="home-gallery-container" type="file" accept="image/png, image/jpeg" class="add-image" data-gallery-id="1"  >
+              <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: plus"></span> Agregar</button>
+              </div>
+            </div>
+            <div id="home-gallery-container" class="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
+           {% for item in gallery|reverse %}
+           <div class="inview-animation" id="image-gallery-container-{{ item.id }}">
+             <div class="uk-inline-clip uk-transition-toggle">
+               <img src="{{ asset('uploads/' ~ item.path) }}" alt="">
+               <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-flex uk-flex-center uk-flex-middle">
+             <a data-id="{{ item.id }}" data-gallery-id="1" class="link-style-a delete-image"><span class="uk-icon" uk-icon="icon: trash;"></span></a>
+            </div>
+             </div>
+           </div>
+           {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="uk-section uk-section-small">
+
+         <h3 class="uk-margin-bottom"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: pencil;"></span> Servicios</h3>
+
+         <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+           <div>
+             <div class="uk-text-center"><img id="image-{{ items[13].id }}" class="uk-margin-bottom" src="{{ asset('uploads/' ~ items[13].value) }}" alt="">
+               <div class="uk-margin-top" uk-form-custom>
+               <input type="file" accept="image/png, image/jpeg" class="editable-image" data-id="{{ items[13].id }}" >
+               <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+               </div>
+             </div>
+           </div>
+           <div>
+             <div>
+               <form >
+               <input class="uk-input uk-disabled uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" data-id="{{ items[14].id }}" type="text" value="{{ items[14].value }}" placeholder="Siéntase como en casa">
+               <textarea class="uk-textarea uk-form-blank uk-form-width-large editable-content" rows="4" type="text" data-id="{{ items[15].id }}" placeholder="Siéntase como en casa">{{ items[15].value }}</textarea>
+               </form>
+
+             </div>
+           </div>
+         </div>
+
+         <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+           <div>
+             <div class="uk-text-center"><img id="image-{{ items[16].id }}" class="uk-margin-bottom" src="{{ asset('uploads/' ~ items[16].value) }}" alt="">
+               <div class="uk-margin-top" uk-form-custom>
+               <input type="file" accept="image/png, image/jpeg" class="editable-image" data-id="{{ items[16].id }}" >
+               <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+               </div>
+             </div>
+           </div>
+           <div>
+             <div>
+               <form >
+               <input data-id="{{ items[17].id }}" class="uk-input uk-disabled uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" type="text" value="{{ items[17].value }}" placeholder="Siéntase como en casa">
+               <textarea data-id="{{ items[18].id }}" class="uk-textarea uk-form-blank uk-form-width-large editable-content" rows="4" type="text" placeholder="Siéntase como en casa">{{ items[18].value }}</textarea>
+               </form>
+
+             </div>
+           </div>
+         </div>
+
+         <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+           <div>
+             <div class="uk-text-center"><img id="image-{{ items[19].id }}" class="uk-margin-bottom" src="{{ asset('uploads/' ~ items[19].value) }}" alt="">
+               <div class="uk-margin-top" uk-form-custom>
+               <input type="file" accept="image/png, image/jpeg" class="editable-image" data-id="{{ items[19].id }}" >
+               <button class="uk-button link-style-a" type="button" tabindex="-1"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span> Cambiar</button>
+               </div>
+             </div>
+           </div>
+           <div>
+             <div>
+               <form >
+               <input data-id="{{ items[20].id }}" class="uk-input uk-disabled uk-form-blank uk-form-width-large uk-form-large edit-title editable-content" type="text" value="{{ items[20].value }}" placeholder="Siéntase como en casa">
+               <textarea data-id="{{ items[21].id }}" class="uk-textarea uk-form-blank uk-form-width-large editable-content" rows="4" type="text" placeholder="Siéntase como en casa">{{ items[21].value }}</textarea>
+               </form>
+
+             </div>
+           </div>
+         </div>
+
+        </div>
+
+        <div class="uk-section uk-section-small">
+
+           <h3 class="uk-margin-bottom"> <span class="uk-icon uk-margin-small-right" uk-icon="icon: pencil;"></span> Datos de Contacto</h3>
+
+           <form >
+           <input data-id="{{ items[22].id }}" class="uk-input uk-form-blank uk-form-width-large editable-content" type="text" value="{{ items[22].value }}" placeholder="Siéntase como en casa">
+           <input data-id="{{ items[23].id }}" class="uk-input uk-form-blank uk-form-width-large editable-content" type="text" value="{{ items[23].value }}" placeholder="Siéntase como en casa">
+           </form>
+
+        </div>
+
+
+{% endblock %}

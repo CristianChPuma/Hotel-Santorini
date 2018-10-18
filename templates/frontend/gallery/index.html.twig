@@ -1,0 +1,123 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<div class="uk-section">
+
+  <div class="uk-container tm-container-medium uk-position-relative">
+
+    <div class="uk-text-center width-left-8 uk-margin-auto">
+
+      <div class="uk-inline">
+        <img uk-img class="header-image uk-hidden" src="{{ asset('assets/components/gallery-header.png') }}" alt="">
+        <canvas id="canvas-fog"></canvas>
+        <div class="uk-position-center">
+          <h1 class="sectiontitle">{{ title }}</h1>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="uk-section">
+  <div class="uk-container tm-container-medium">
+
+   <div class="uk-width-large uk-text-center uk-text-left@m">
+     <h1>Nuestra Imagen</h1>
+     <p>Revivamos esos momentos especiales tomadas en una fotografía para guardar los recuerdos con nuestros clientes.</p>
+   </div>
+
+</div>
+</div>
+
+  <div class="uk-section">
+
+  <div class="uk-section uk-section-small  uk-flex uk-flex-right">
+
+    <div class="width-left-8 ">
+      <div>
+
+        <div class="uk-position-relative uk-visible-toggle uk-light" uk-slider>
+
+        <ul class="uk-slider-items uk-grid uk-grid-match" uk-height-viewport="offset-top: true; offset-bottom: 30">
+
+        {% for item in gallery|slice(0, 10) %}
+        <li class="uk-width-3-4">
+            <div class="uk-cover-container">
+                <img src="{{ asset('uploads/' ~ item.path) }}" alt="" uk-cover>
+                {#<div class="uk-position-center uk-panel"><h1>Playa</h1></div>#}
+            </div>
+        </li>
+            {% endfor %}
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
+    </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="uk-section uk-text-center">
+
+<h1 class="text-cover">Vive</h1>
+
+</div>
+
+<div class="uk-section">
+
+  <div class="uk-container tm-container-medium">
+      <div class="uk-width-xlarge uk-margin-auto uk-text-center">
+          <h1 class=" inview-animation">Vive el momento</h1>
+      <p class="uk-margin  inview-animation">Santorini es un hotel diseñado para parejas y amigos en un ambiente único que fusiona descanso, gastronomía y diversión.</p>
+      </div>
+    </div>
+
+
+</div>
+
+<div class="uk-section">
+
+  <div class="uk-container tm-container-medium">
+
+    <div class="uk-position-relative uk-visible-toggle uk-light" uk-slideshow="ratio: 7:3; animation: push">
+
+   <ul class="uk-slideshow-items">
+     {% for item in gallery|reverse %}
+     <li>
+         <img src="{{ asset('uploads/' ~ item.path) }}" alt="" uk-cover>
+     </li>
+     {% endfor %}
+   </ul>
+
+   <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+   <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+</div>
+
+<div class="uk-margin-large"></div>
+
+  </div>
+
+</div>
+
+<div class="uk-position-top">
+  <div class="uk-container tm-container-medium">
+    {% include 'frontend/components/mainnav.html.twig' %}
+  </div>
+</div>
+
+{% include 'frontend/components/footer.html.twig' %}
+
+
+{% endblock %}

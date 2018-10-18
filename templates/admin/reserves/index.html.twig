@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+  <h2>Reservas</h2>
+  <p>Administra Las Reservas Recibidas</p>
+  <hr class="uk-hr uk-margin-medium">
+
+  <div class="uk-section uk-section-small">
+
+    <div class="uk-overflow-auto">
+      <table class="uk-table uk-table-small uk-table-divider">
+          <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Teléfono</th>
+                  <th>Huéspedes</th>
+                  <th>Fecha</th>
+                  <th>Mensaje</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for res in reservations|reverse %}
+              <tr>
+                  <td>{{ res.name }}</td>
+                  <td>{{ res.email }}</td>
+                  <td>{{ res.phone }}</td>
+                  <td>{{ res.huesp }}</td>
+                  <td>{{ res.date }}</td>
+                  <td>{{ res.message }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  {% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Habitaciones</h2>
+  <p>Administra Las Habitaciones Mostradas en tu Sitio Web</p>
+  <div class="uk-margin">
+    <a class="uk-button link-style-a" uk-toggle href="#add-newroom" type="button" tabindex="-1">
+      <span class="uk-icon uk-margin-small-right" uk-icon="icon: plus"></span>
+      Agregar</a>
+  </div>
+
+  <hr class="uk-hr">
+
+  <div class="uk-section uk-section-small">
+
+     <div class="uk-container tm-container-medium">
+
+            <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+
+              {% for room in rooms %}
+              {% include 'frontend/components/roomcard.html.twig' with {'room' : room, 'style' : 'admin'} %}
+              {% endfor %}
+
+            </div>
+
+
+     </div>
+
+  </div>
+
+  <div id="add-newroom" uk-modal="uk-modal">
+    <div class="uk-modal-dialog">
+      <button class="uk-modal-close-default" type="button" uk-close="uk-close"></button>
+      <div class="uk-modal-header">
+        <h2 class="uk-modal-title">Agregar Habitación</h2>
+      </div>
+      <div class="uk-modal-body">
+        <form class="uk-form-stacked">
+          <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Nombre</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" id="room-name" type="text" placeholder="...">
+            </div>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Introducción</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" id="room-intro" type="text" placeholder="...">
+            </div>
+          </div>
+
+          <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Contenido</label>
+            <div class="uk-form-controls">
+              <div class="uk-textarea" rows="10" id="room-content" type="text" placeholder="..."></div>
+            </div>
+          </div>
+
+          <div class="uk-margin" uk-margin>
+        <div uk-form-custom="target: true">
+            <input type="file" id="room-file">
+            <input class="uk-input uk-form-width-medium" type="text" placeholder="Cover" disabled>
+        </div>
+    </div>
+
+        </form>
+      </div>
+      <div class="uk-modal-footer  uk-text-right">
+        <button class="uk-button link-style-a" id="insert-newroom" type="button">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+      var quill = new Quill('#room-content',{
+        theme: 'snow'
+      });
+
+     $('#insert-newroom').click(function(){
+
+         console.log('nice');
+         var name = $('#room-name').val();
+         var intro = $('#room-intro').val();
+         var contentHtml = quill.root.innerHTML;
+         var coverfile = $('#room-file').get(0).files[0];
+
+         var data = new FormData();
+         data.append('name', name);
+         data.append('intro', intro);
+         data.append('contentHtml', contentHtml);
+         data.append('file', coverfile, coverfile.name);
+
+         console.log(contentHtml);
+
+         UIkit.notification({
+           message: 'Procesando Cambios',
+           status: 'danger',
+           pos: 'bottom-left',
+           timeout: 2000
+        });
+
+        $.ajax({
+          type: 'post',
+          url: '{{ path('request-insert-room') }}',
+          processData: false,
+                async: true,
+                contentType: false,
+          data: data,
+          async: true,
+          success: function(data) {
+
+            UIkit.notification({
+              message: 'Cambios Aplicados',
+              status: 'success',
+              pos: 'bottom-left',
+              timeout: 2000
+           });
+
+         },
+         error: function(){
+           UIkit.notification({
+             message: 'No Se Pudieron Procesar Los Cambios',
+             status: 'danger',
+             pos: 'bottom-left',
+             timeout: 2000
+          });
+         }
+       });
+
+     });
+
+     $('.delete-room').click(function(){
+
+         var roomid = $(this).data('id');
+         UIkit.notification({
+           message: 'Procesando Cambios',
+           status: 'danger',
+           pos: 'bottom-left',
+           timeout: 2000
+        });
+
+        $.ajax({
+          type: 'post',
+          url: '{{ path('request-delete-room') }}',
+          dataType: "json",
+          data: {
+         "id": roomid,
+          },
+          async: true,
+          success: function(data) {
+
+            console.log(data.imagePath);
+
+            $('#room-container-'+roomid).remove();
+
+            UIkit.notification({
+              message: 'Cambios Aplicados',
+              status: 'success',
+              pos: 'bottom-left',
+              timeout: 2000
+           });
+
+          }
+         });
+
+     });
+
+
+  </script>
+
+{% endblock %}

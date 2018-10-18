@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% block title %}{% endblock %}
+      | Hotel Santorini</title>
+    {% block stylesheets %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/css/uikit.min.css"/>
+      <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+      <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700|Playfair+Display:400,400i,700,700i" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/js/uikit.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+      <link rel="shortcut icon" type="image/png" href="{{ asset('assets/components/favicon.png') }}"/>
+      <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/97/three.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+      <script src="{{ asset('assets/hover.js') }}" charset="utf-8"></script>
+      <script src="https://unpkg.com/scrollreveal"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    {% endblock %}
+  </head>
+  <body >
+
+  <div class="uk-offcanvas-content">
+
+    <div class="background-lines uk-child-width-1-3 uk-grid-collapse" uk-grid="uk-grid">
+      <div class="line-a"></div>
+      <div class="line-b"></div>
+      <div class="line-c"></div>
+    </div>
+    <div class="uk-overflow-hidden" id="main-container">
+      <div class="uk-section uk-background-cover light" data-src="https://images.unsplash.com/photo-1505759600237-87aaf407ab96?ixlib=rb-0.3.5&s=b42f42c8d56232913b84a6de3e8f7c22&auto=format&fit=crop&w=1334&q=80" uk-img>
+        <div class="uk-margin-medium-left">
+          <h1>Bienvenido</h1>
+          <p>Realiza modificaciones y lleva un control de clientes.</p>
+        </div>
+      </div>
+      <div class="" uk-grid>
+
+        <div class="uk-width-1-5@s">
+          <div class="uk-padding">
+            <ul class="uk-nav uk-nav-default">
+        <li class="{% if app.request.attributes.get('_route') == 'admin' %}uk-active{% endif %}"><a href="{{ path('admin') }}">Inicio</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'admin-services' %}uk-active{% endif %}"><a href="{{ path('admin-services') }}">Servicios</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'admin-gallery' %}uk-active{% endif %}"><a href="{{ path('admin-gallery') }}">Galería</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'admin-events' %}uk-active{% endif %}"><a href="{{ path('admin-events') }}">Eventos</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'admin-rooms' %}uk-active{% endif %}"><a href="{{ path('admin-rooms') }}">Habitaciones</a></li>
+        <li class="{% if app.request.attributes.get('_route') == 'admin-reserves' %}uk-active{% endif %}"><a href="{{ path('admin-reserves') }}">Reservas Realizadas</a></li>
+    </ul>
+          </div>
+      </div>
+
+      <div class="uk-width-4-5@s">
+
+        <div class="uk-container tm-container-medium">
+<div class="uk-padding">
+      {% block body %}{% endblock %}
+      </div>
+</div>
+      </div>
+
+      </div>
+    </div>
+
+    <div id="loader-container">
+      <div class="loader uk-text-center">
+        <h4 class=" wave-animation" data-duration="2100" >Hola!</h4>
+      </div>
+    </div>
+
+    </div>
+
+    {% include 'frontend/components/contactmodal.html.twig' %}
+
+    <script>
+      var item = $('.wave-animation');
+      item.css('opacity','1');
+      var chars = item.text().split('');
+      var duration = item.data('duration');
+      var htmlspans = "";
+      for(var i=0; i<chars.length; i++){
+        var delay =  (duration / chars.length) * i ;
+        htmlspans += '<span style = "animation-delay: ' +delay+ 'ms">' + (chars[i]) + '</span>';
+      }
+
+      item.html(htmlspans);
+
+
+
+                    $('.editable-bg-image').change(function(){
+
+                       var id = $(this).data('id');
+                       var content = $(this).get(0).files[0];
+
+                       var data = new FormData();
+                       data.append('file', content, content.name);
+                       data.append('id', id);
+
+                       console.log(data);
+
+                       $.ajax({
+                         type: 'post',
+                         url: '/request/updatecontentimage',
+                         processData: false,
+                               async: true,
+                               contentType: false,
+                         data: data,
+                         async: true,
+                         success: function(data) {
+
+                           console.log(data.imagePath);
+
+                           $('#bg-image-' + id).css('background-image','url({{ asset('uploads/') }}' + data.imagePath);
+
+                           UIkit.notification({
+                             message: 'Cambios Aplicados',
+                             status: 'success',
+                             pos: 'bottom-left',
+                             timeout: 2000
+                          });
+
+                         }
+                        });
+
+                    });
+
+                    $('.editable-image').change(function(){
+
+                       var id = $(this).data('id');
+                       var content = $(this).get(0).files[0];
+
+                       $('#image-' + id).attr('src','{{ asset('assets/components/okta-loader.gif') }}');
+
+                       var data = new FormData();
+                       data.append('file', content, content.name);
+                       data.append('id', id);
+
+                       UIkit.notification({
+                         message: 'Procesando Cambios',
+                         status: 'danger',
+                         pos: 'bottom-left',
+                         timeout: 2000
+                      });
+
+                       $.ajax({
+                         type: 'post',
+                         url: '/request/updatecontentimage',
+                         processData: false,
+                               async: true,
+                               contentType: false,
+                         data: data,
+                         async: true,
+                         success: function(data) {
+
+                                $('#image-' + id).attr('src','{{ asset('uploads/') }}' + data.imagePath);
+
+
+                           UIkit.notification({
+                             message: 'Cambios Aplicados',
+                             status: 'success',
+                             pos: 'bottom-left',
+                             timeout: 2000
+                          });
+
+                         }
+                        });
+
+                    });
+
+                    $('.add-image').change(function(){
+
+                        var image = $(this).get(0).files[0];
+                        var galleryid = $(this).data('gallery-id');
+                        var container =  $(this).data('for');
+                        var htmlcontainer = $('#' + container);
+
+                        var data = new FormData();
+                        data.append('file', image, image.name);
+                        data.append('galleryid', galleryid);
+
+                        UIkit.notification({
+                          message: 'Procesando Cambios',
+                          status: 'danger',
+                          pos: 'bottom-left',
+                          timeout: 2000
+                       });
+
+                       $.ajax({
+                         type: 'post',
+                         url: '{{ path('request-upload-image-home') }}',
+                         processData: false,
+                               async: true,
+                               contentType: false,
+                         data: data,
+                         async: true,
+                         success: function(data) {
+
+                           htmlcontainer.prepend('<div class="inview-animation" id="image-gallery-container-'+data.id+'">' +
+                            '<div class="uk-inline-clip uk-transition-toggle">'+
+                            '<img src="{{ asset('/uploads/') }}'+ data.imagePath +'" alt="">'+
+                            '<div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-flex uk-flex-center uk-flex-middle">'+
+                            '<a data-id="'+ data.id +'" class="link-style-a delete-image"><span class="uk-icon" uk-icon="icon: trash;"></span></a>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>');
+
+                           UIkit.notification({
+                             message: 'Cambios Aplicados',
+                             status: 'success',
+                             pos: 'bottom-left',
+                             timeout: 2000
+                          });
+
+                          ScrollReveal().sync();
+
+                        },
+                        error: function(){
+                          UIkit.notification({
+                            message: 'No Se Pudieron Procesar Los Cambios',
+                            status: 'danger',
+                            pos: 'bottom-left',
+                            timeout: 2000
+                         });
+                        }
+                        });
+
+
+                    });
+
+                    $('body').on('click', '.delete-image', function(){
+
+                      var id = $(this).data('id');
+
+                      UIkit.notification({
+                        message: 'Procesando Cambios',
+                        status: 'danger',
+                        pos: 'bottom-left',
+                        timeout: 2000
+                      });
+
+                      $.ajax({
+                        type: 'post',
+                        url: '{{ path('request-delete-image') }}',
+                        dataType: "json",
+                        data: {
+                       "id": id,
+                        },
+                        async: true,
+                        success: function(data) {
+
+                          UIkit.notification({
+                            message: 'Cambios Aplicados',
+                            status: 'success',
+                            pos: 'bottom-left',
+                            timeout: 2000
+                         });
+
+                         $('#image-gallery-container-' + id).remove();
+
+                       ScrollReveal().sync();
+
+                        }
+                       });
+
+
+                    });
+
+    </script>
+
+    {% block javascripts %}
+      <script src="{{ asset('build/app.js') }}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.12/js/uikit-icons.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+      <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+    {% endblock %}
+  </body>
+</html>
